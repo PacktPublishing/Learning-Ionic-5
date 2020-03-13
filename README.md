@@ -16,6 +16,10 @@ These instructions will get you a copy of the project up and running on your loc
 * [NodeJS](http://www.nodejs.org/) - Install the latest LTS of Node
 * [Ionic 5 CLI]() - Install the Ionic 5 CLI
 
+```
+npm install -g @ionic/cli
+```
+
 ### Prerequisites
 #### Minimum Hardware Requirements
 For successful completion of this course, students will require the computer systems with at least the following:
@@ -35,3 +39,7 @@ Storage:
 * Browser: Chrome or Firefox 
 * Any editor will work
 * Node.js LTS 8.9.1 Installed
+
+## Authors
+
+* **Brian Szoszorek** - [LinkedIn](https://www.linkedin.com/in/brian-s-2544a72/) - [New Point Media](https://www.newpointmedia.com)
