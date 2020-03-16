@@ -8,45 +8,55 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'dashboard',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../dashboard/dashboard.module').then(m => m.DashboardPageModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'inventory',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../inventory/inventory-list/inventory-list.module').then(m => m.InventoryListPageModule)
+          },
+          {
+            path: 'edit/:id',
+            loadChildren: () =>
+                import('../inventory/inventory-editor/inventory-editor.module').then(m => m.InventoryEditorPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () =>
+                import('../inventory/inventory-editor/inventory-editor.module').then(m => m.InventoryEditorPageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'user-account',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../user-account/user-account.module').then(m => m.UserAccountPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/dashboard',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/dashboard',
     pathMatch: 'full'
   }
 ];
