@@ -1,0 +1,20 @@
+{
+  "development": {
+    "mongo": {
+      "url": "mongodb+srv://YourUsernameHere:YourPasswordHere@cluster0-wpzi9.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "url": "http://localhost:8100"
+  },
+  "staging": {
+    "mongo": {
+      "url": "mongodb+srv://YourUsernameHere:YourPasswordHere@cluster0-wpzi9.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "url": "https://staging.yourdomain.com"
+  },
+  "production": {
+    "mongo": {
+      "url": "mongodb+srv://YourUsernameHere:YourPasswordHere@cluster0-wpzi9.mongodb.net/test?retryWrites=true&w=majority"
+    },
+    "url": "https://production.yourdomain.com"
+  }
+}
