@@ -1,12 +1,110 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Inventory Editor</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>{{pageTitle}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+    <ion-fab horizontal="end" vertical="top">
+        <ion-fab-button (click)="addPhoto()">
+            <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <app-image-slider [images]="inventoryItem.images"></app-image-slider>
+            </ion-col>
+        </ion-row>
+        <form (keyup.enter)="saveItem()" (submit)="saveItem()" [formGroup]="inventoryForm" novalidate>
+            <ion-row>
+                <ion-col size-md="6" size-sm="12" size-xs="12">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label position="floating">Title</ion-label>
+                            <ion-input [class.invalid]="
+                                !inventoryForm.controls.title.valid &&
+                                inventoryForm.controls.title.touched" formControlName="title">
+                            </ion-input>
+                        </ion-item>
+
+                        <ion-item *ngIf="
+                              !inventoryForm.controls.title.valid &&
+                              inventoryForm.controls.title.touched" class="error-message">
+                            <p>Title must be at least 3 characters</p>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label position="floating">Quantity</ion-label>
+                            <ion-input [class.invalid]="
+                                !inventoryForm.controls.qty.valid &&
+                                inventoryForm.controls.qty.touched" formControlName="qty"
+                                       type="number">
+                            </ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-input [class.invalid]="
+                                !inventoryForm.controls.serialNo.valid &&
+                                inventoryForm.controls.serialNo.touched"
+                                       formControlName="serialNo"
+                                       placeholder="Serial #">
+                            </ion-input>
+                            <ion-button icon-only expand="full" slot="end">
+                                <ion-icon name="scan" slot="end"></ion-icon>
+                                Scan
+                            </ion-button>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input [class.invalid]="
+                                !inventoryForm.controls.modelNo.valid &&
+                                inventoryForm.controls.modelNo.touched"
+                                       formControlName="modelNo"
+                                       placeholder="Model #">
+                            </ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label position="floating">Purchase Price</ion-label>
+                            <ion-input [class.invalid]="
+                                !inventoryForm.controls.purchasePrice.valid &&
+                                inventoryForm.controls.purchasePrice.touched" formControlName="purchasePrice"
+                                       inputmode="numeric">
+                            </ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label position="floating">Estimated Resale</ion-label>
+                            <ion-input [class.invalid]="
+                                !inventoryForm.controls.resalePrice.valid &&
+                                inventoryForm.controls.resalePrice.touched"
+                                       formControlName="resalePrice">
+                            </ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+        </form>
+    </ion-grid>
+
 </ion-content>
+
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col offset-md="6" size-md="3">
+                <ion-button (click)="cancel()" color="danger" expand="full">
+                    Cancel
+                </ion-button>
+            </ion-col>
+            <ion-col size-lg="3">
+                <ion-button (click)="saveItem()" [disabled]="inventoryForm.invalid" expand="full">
+                    Save
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>
+

@@ -20,14 +20,22 @@ export class InventoryService {
     constructor(private httpClient: HttpClient) {
     }
 
+    public refreshData() {
+        this.fetchData();
+    }
+
     public loadInventoryList() {
         if (!this.inventoryList) {
             this.fetchData();
         }
     }
 
-    public refreshData() {
-        this.fetchData();
+    public saveInventoryItem(item: InventoryItem) {
+
+    }
+
+    public updateInventoryItem(item: InventoryItem) {
+
     }
 
     public deleteInventory(item: InventoryItem) {
@@ -46,7 +54,7 @@ export class InventoryService {
     private fetchData() {
         this.fetching.next(true);
 
-            // Using timeout to simulate calling backend
+        // Using timeout to simulate calling backend
         setTimeout(value => {
             // Create mock data
             this.inventoryList = [{
