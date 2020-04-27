@@ -5,8 +5,6 @@
     </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content class="ion-no-padding">
 
     <ion-header collapse="condense">
@@ -14,7 +12,6 @@
             <ion-title size="large">
                 Inventory
             </ion-title>
-
         </ion-toolbar>
     </ion-header>
 
@@ -26,11 +23,6 @@
     </ion-refresher>
 
     <ion-grid class="ion-no-padding">
-<!--        <ion-row *ngIf="showLoading">-->
-<!--            <ion-col class="ion-text-center ion-padding">-->
-
-<!--            </ion-col>-->
-<!--        </ion-row>-->
         <ion-row *ngIf="!showLoading && inventoryList && inventoryList.length === 0">
             <ion-col class="ion-text-center no-inventory">
                 You currently have no items in your inventory!
@@ -45,17 +37,16 @@
             <ion-col size-md="8" offset-md="2">
                 <ion-list lines="full">
                     <app-inventory-item-card
-                                             *ngFor="let inventoryItem of inventoryList | textSearch: searchTerm"
-                                             [inventory]="inventoryItem"
-                                             (openEvent)="handleInventoryOpen($event)"
-                                             (deleteEvent)="handleInventoryDelete($event)"
-                                             (shareEvent)="handleInventoryShare($event)">
+                            *ngFor="let inventoryItem of inventoryList | textSearch: searchTerm"
+                            [inventory]="inventoryItem"
+                            (openEvent)="handleInventoryOpen($event)"
+                            (deleteEvent)="handleInventoryDelete($event)"
+                            (shareEvent)="handleInventoryShare($event)">
                     </app-inventory-item-card>
                 </ion-list>
             </ion-col>
         </ion-row>
     </ion-grid>
-
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end">
