@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { InventoryListPageRoutingModule } from './inventory-list-routing.module';
 
 import { InventoryListPage } from './inventory-list.page';
+import {InventoryItemCardComponent} from '../shared/components/inventory-item-card/inventory-item-card.component';
+import {TextSearchPipe} from '../shared/pipes/text-search.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { InventoryListPage } from './inventory-list.page';
     IonicModule,
     InventoryListPageRoutingModule
   ],
-  declarations: [InventoryListPage]
+  declarations: [InventoryListPage, InventoryItemCardComponent, TextSearchPipe]
 })
 export class InventoryListPageModule {}

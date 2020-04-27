@@ -1,35 +1,65 @@
-<ion-header>
+<ion-header [translucent]="false">
     <ion-toolbar>
         <ion-title>Inventory</ion-title>
+        <ion-spinner slot="end" *ngIf="showLoading"></ion-spinner>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-list lines="full">
-        <ion-item-sliding>
-            <ion-item-options side="end">
-                <ion-item-option color="danger">
-                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-                </ion-item-option>
-                <ion-item-option>
-                    <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
-                </ion-item-option>
-            </ion-item-options>
 
-            <ion-item detail>
-                <ion-label slot="start">
-                    <h1>LG TV</h1>
-                    <p>$550.00</p>
-                </ion-label>
-                <ion-img slot="end"
-                         src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6290/6290171_sd.jpg;maxHeight=240;maxWidth=150"></ion-img>
-            </ion-item>
-        </ion-item-sliding>
-    </ion-list>
+
+<ion-content class="ion-no-padding">
+
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">
+                Inventory
+            </ion-title>
+
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-grid class="ion-no-padding">
+<!--        <ion-row *ngIf="showLoading">-->
+<!--            <ion-col class="ion-text-center ion-padding">-->
+
+<!--            </ion-col>-->
+<!--        </ion-row>-->
+        <ion-row *ngIf="!showLoading && inventoryList && inventoryList.length === 0">
+            <ion-col class="ion-text-center no-inventory">
+                You currently have no items in your inventory!
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="inventoryList && inventoryList.length > 0">
+            <ion-col size-md="8" offset-md="2">
+                <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
+            </ion-col>
+        </ion-row>
+        <ion-row [hidden]="!inventoryList && inventoryList.length === 0">
+            <ion-col size-md="8" offset-md="2">
+                <ion-list lines="full">
+                    <app-inventory-item-card
+                                             *ngFor="let inventoryItem of inventoryList | textSearch: searchTerm"
+                                             [inventory]="inventoryItem"
+                                             (openEvent)="handleInventoryOpen($event)"
+                                             (deleteEvent)="handleInventoryDelete($event)"
+                                             (shareEvent)="handleInventoryShare($event)">
+                    </app-inventory-item-card>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
     <ion-fab vertical="bottom" horizontal="end">
         <ion-fab-button (click)="addInventory()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+
 </ion-content>
