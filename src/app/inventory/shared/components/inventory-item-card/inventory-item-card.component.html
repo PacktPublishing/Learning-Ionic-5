@@ -1,12 +1,12 @@
 <ion-item-sliding>
     <ion-item-options side="start">
-        <ion-item-option color="primary" (click)="editInventoryShare()">
+        <ion-item-option color="primary" (click)="emitInventoryShare()">
             <ion-icon slot="icon-only" name="share"></ion-icon>
         </ion-item-option>
     </ion-item-options>
-    <ion-item detail (click)="emitInventoryOpen()" class="ion-padding-bottom">
-        <ion-img slot="end" class="inventory-image"
-                 [src]="inventory.images[0]"></ion-img>
+
+    <ion-item detail (click)="emitInventoryOpen()" >
+        <ion-img slot="end" class="inventory-image" [src]="inventory.images[0]"></ion-img>
         <ion-label slot="start">
             <h1>{{inventory.title}}</h1>
             <p>{{inventory.purchasePrice | currency}}</p>

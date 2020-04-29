@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InventoryItem} from '../../models/inventory.model';
+import {InventoryItem} from '../../inventory.model';
 
 @Component({
     selector: 'app-inventory-item-card',
@@ -28,7 +28,7 @@ export class InventoryItemCardComponent implements OnInit {
         this.deleteEvent.emit(this.inventory);
     }
 
-    public editInventoryShare() {
+    public emitInventoryShare() {
         this.shareEvent.emit(this.inventory);
     }
 }

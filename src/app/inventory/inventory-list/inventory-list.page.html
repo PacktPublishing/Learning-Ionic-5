@@ -17,8 +17,8 @@
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content
-                pullingText="Pull to refresh"
-                refreshingSpinner="circles">
+                pulling-text="pull to refresh"
+                refreshing-spinner="circles">
         </ion-refresher-content>
     </ion-refresher>
 
@@ -28,13 +28,15 @@
                 You currently have no items in your inventory!
             </ion-col>
         </ion-row>
+
         <ion-row *ngIf="inventoryList && inventoryList.length > 0">
-            <ion-col size-md="8" offset-md="2">
+            <ion-col>
                 <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
             </ion-col>
         </ion-row>
+
         <ion-row [hidden]="!inventoryList && inventoryList.length === 0">
-            <ion-col size-md="8" offset-md="2">
+            <ion-col>
                 <ion-list lines="full">
                     <app-inventory-item-card
                             *ngFor="let inventoryItem of inventoryList | textSearch: searchTerm"
@@ -53,4 +55,4 @@
     <ion-fab-button (click)="addInventory()">
         <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-</ion-fab>s
+</ion-fab>
