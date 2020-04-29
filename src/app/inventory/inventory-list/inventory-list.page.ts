@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertController, NavController} from '@ionic/angular';
-import {InventoryItem} from '../../core/models/inventory.model';
+import {InventoryItem} from '../shared/models/inventory.model';
 import {InventoryService} from '../shared/services/inventory.service';
 import {Subscription} from 'rxjs';
 

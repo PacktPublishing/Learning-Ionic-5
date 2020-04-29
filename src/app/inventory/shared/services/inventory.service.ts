@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {InventoryItem} from '../../../core/models/inventory.model';
+import {InventoryItem} from '../models/inventory.model';
 import {HttpClient} from '@angular/common/http';
-import {InventoryReport} from '../../../core/models/inventory-report.model';
+import {InventoryReport} from '../models/inventory-report.model';
 
 @Injectable({
     providedIn: 'root'

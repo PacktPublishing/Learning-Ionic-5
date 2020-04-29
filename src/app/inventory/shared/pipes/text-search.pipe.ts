@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {InventoryItem} from '../../../core/models/inventory.model';
+import {InventoryItem} from '../models/inventory.model';
 
 @Pipe({
     name: 'textSearch'
