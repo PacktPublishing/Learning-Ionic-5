@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
+import {InventoryItem} from './inventory.model';
 import {BehaviorSubject} from 'rxjs';
-import {InventoryItem} from '../models/inventory.model';
+import {InventoryReport} from './inventory-report.model';
 import {HttpClient} from '@angular/common/http';
-import {InventoryReport} from '../models/inventory-report.model';
 
 @Injectable({
     providedIn: 'root'
@@ -30,33 +30,11 @@ export class InventoryService {
         }
     }
 
-    public saveInventoryItem(item: InventoryItem) {
-
-    }
-
-    public updateInventoryItem(item: InventoryItem) {
-
-    }
-
-    public deleteInventory(item: InventoryItem) {
-        const index: number = this.inventoryList.indexOf(item);
-
-        if (index !== -1) {
-            this.inventoryList.splice(index, 1);
-        }
-
-        this.dispatchListUpdate();
-
-        this.dispatchReportUpdate();
-
-    }
-
     private fetchData() {
         this.fetching.next(true);
 
-        // Using timeout to simulate calling backend
+        // load mock data
         setTimeout(value => {
-            // Create mock data
             this.inventoryList = [{
                 _id: 'mongoid',
                 title: 'Love Seat',
@@ -88,7 +66,7 @@ export class InventoryService {
                     notes: ''
                 },
                 {
-                    _id: 'mongoid1',
+                    _id: 'mongoid2',
                     title: 'Kitchen Chair',
                     description: 'light colored chairs',
                     qty: 4,
@@ -102,7 +80,7 @@ export class InventoryService {
                     notes: ''
                 },
                 {
-                    _id: 'mongoid1',
+                    _id: 'mongoid3',
                     title: 'Kitchen Chair',
                     description: 'light colored chairs',
                     qty: 4,
@@ -116,7 +94,7 @@ export class InventoryService {
                     notes: ''
                 },
                 {
-                    _id: 'mongoid1',
+                    _id: 'mongoid4',
                     title: 'Kitchen Chair',
                     description: 'light colored chairs',
                     qty: 4,
@@ -130,7 +108,7 @@ export class InventoryService {
                     notes: ''
                 },
                 {
-                    _id: 'mongoid1',
+                    _id: 'mongoid5',
                     title: 'Kitchen Chair',
                     description: 'light colored chairs',
                     qty: 4,
@@ -150,13 +128,8 @@ export class InventoryService {
 
             this.fetching.next(false);
 
-            console.log('loading done');
-
         }, 1000);
-    }
 
-    public getInventoryItem(id: string): InventoryItem {
-        return {...this.inventoryList.find(item => item._id === id)};
     }
 
     private dispatchListUpdate() {
@@ -166,11 +139,12 @@ export class InventoryService {
     private dispatchReportUpdate() {
         const reportUpdate: InventoryReport = {
             totalItems: this.inventoryList.length,
-            estimatedResaleValue: this.inventoryList.map(element => (element.resalePrice)).reduce((a, b) => a + b, 0),
+            resaleValue: this.inventoryList.map(element => (element.resalePrice)).reduce((a, b) => a + b, 0),
             totalValue: this.inventoryList.map(element => (element.purchasePrice)).reduce((a, b) => a + b, 0)
         };
 
         this.inventoryReportUpdate.next(reportUpdate);
     }
+
 
 }

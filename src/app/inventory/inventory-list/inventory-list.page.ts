@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AlertController, NavController} from '@ionic/angular';
-import {InventoryItem} from '../../core/models/inventory.model';
-import {InventoryService} from '../shared/services/inventory.service';
+import {InventoryService} from '../shared/inventory.service';
+import {InventoryItem} from '../shared/inventory.model';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -13,13 +13,14 @@ export class InventoryListPage implements OnInit, OnDestroy {
 
     public inventoryList: Array<InventoryItem> = [];
 
+    public showLoading = false;
+
     private inventoryListSub: Subscription;
 
     private inventoryFetchingSub: Subscription;
 
-    public showLoading = false;
-
     public searchTerm: '';
+
 
     constructor(private navController: NavController,
                 private inventoryService: InventoryService,
@@ -36,9 +37,10 @@ export class InventoryListPage implements OnInit, OnDestroy {
         });
 
         this.inventoryService.loadInventoryList();
+
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.inventoryListSub.unsubscribe();
         this.inventoryFetchingSub.unsubscribe();
     }
@@ -47,7 +49,7 @@ export class InventoryListPage implements OnInit, OnDestroy {
         this.navController.navigateForward('/tabs/inventory/create');
     }
 
-    public handleInventoryOpen(inventory: InventoryItem) {
+    handleInventoryOpen(inventory: InventoryItem) {
         this.navController.navigateForward('/tabs/inventory/edit/' + inventory._id);
     }
 
@@ -59,10 +61,11 @@ export class InventoryListPage implements OnInit, OnDestroy {
                 {
                     text: 'Cancel',
                     role: 'cancel',
-                    handler: (blah) => {
-                        console.log('Canceled');
+                    handler: () => {
+                        console.log('canceled');
                     }
-                }, {
+                },
+                {
                     text: 'Delete',
                     handler: () => {
                         this.deleteInventoryItem(inventory);
@@ -74,8 +77,8 @@ export class InventoryListPage implements OnInit, OnDestroy {
         await alert.present();
     }
 
-    public handleInventoryShare(inventory: InventoryItem) {
-        // TODO: Implement native share
+    public handleInventoryShare(event: InventoryItem) {
+
     }
 
     public doRefresh(event: any) {
@@ -83,8 +86,7 @@ export class InventoryListPage implements OnInit, OnDestroy {
         this.inventoryService.refreshData();
     }
 
-    private deleteInventoryItem(item: InventoryItem) {
-        this.inventoryService.deleteInventory(item);
-    }
+    private deleteInventoryItem(inventory: InventoryItem) {
 
+    }
 }
