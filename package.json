@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "generate-password": "^1.4.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "mongoose": "5.8.2",
     "mongoose-beautiful-unique-validation": "^7.1.1"
